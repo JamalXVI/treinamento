@@ -19,4 +19,11 @@ public interface JogadorService {
    */
   Jogador buscarJogador(Integer idJogador) throws JogoCartaException;
 
+  /**
+   * Salva o estado do jogador
+   * @param jogador
+   * @return
+   */
+  Jogador salvar(Jogador jogador);
+
 }

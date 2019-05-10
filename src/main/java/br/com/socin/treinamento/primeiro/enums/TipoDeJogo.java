@@ -6,8 +6,10 @@ import lombok.Getter;
 
 @AllArgsConstructor
 public enum TipoDeJogo {
-  BLACK_JACK(2), TRUCO(7), OITO_MALUCO(8);
+  BLACK_JACK(2, 10), TRUCO(3, 4), OITO_MALUCO(8, 6);
 
-  @Getter(AccessLevel.NONE)
+  @Getter
   private Integer numeroDeCartas;
+  @Getter
+  private Integer limiteJogadores;
 }

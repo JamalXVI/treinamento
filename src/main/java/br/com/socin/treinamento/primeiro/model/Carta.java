@@ -25,4 +25,8 @@ public class Carta {
     return naipe.name();
   }
 
+  @Override
+  public String toString() {
+    return getTipoCarta()+"  "+getNaipe();
+  }
 }

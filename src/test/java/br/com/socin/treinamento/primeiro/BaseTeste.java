@@ -12,4 +12,7 @@ public class BaseTeste {
     thrown.expectMessage(mensagem);
     thrown.expect(JogoCartaException.class);
   }
+  public void esperarExcecao(){
+    thrown.expect(RuntimeException.class);
+  }
 }

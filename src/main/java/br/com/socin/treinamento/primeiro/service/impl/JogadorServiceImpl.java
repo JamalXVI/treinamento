@@ -38,4 +38,9 @@ public class JogadorServiceImpl implements JogadorService {
     }
     throw new JogoCartaException(ERRO_JOGADOR_NAO_EXISTE);
   }
+
+  @Override
+  public Jogador salvar(Jogador jogador){
+    return jogadorRepository.save(jogador);
+  }
 }
