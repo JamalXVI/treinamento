@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 
 @Service
@@ -28,7 +30,7 @@ public class LeitorDeRegexService {
      */
     //TIPO ACAO PARAM VLR
     @Scheduled(cron = "*/2 * * * * *")
-    public void ler() throws IllegalAccessException, InstantiationException, ClassNotFoundException {
+    public void ler() throws IllegalAccessException, InstantiationException, ClassNotFoundException, NoSuchMethodException, InvocationTargetException {
         String regex = " Pessoa 1 0 1 1 João 2 Silva";
         String[] valores = regex.replaceFirst(" ", "")
                 .split(" ");
@@ -49,7 +51,13 @@ public class LeitorDeRegexService {
                 pessoaRepository.cadastra(pessoa);
                 //Atualiza Pessoa
             } else {
-                Class<Pessoa> classPessoa = (Class<Pessoa>) Class.forName("br.com.socin.treinamento.terceiro.modelo.Pessoa");
+                Class<Pessoa> classPessoa = (Class<Pessoa>) Class.forName("br.com.socin.treinamento.terceiro.modelo." + valores[0]);
+                Constructor<Pessoa> constructor = classPessoa.getDeclaredConstructor();
+                Pessoa pessoa1 = constructor.newInstance(1L, "a", "b");
+                //Métodos
+                //Get Declared Methods
+                //Set Acessible
+                //Invoke
                 Pessoa pessoa = classPessoa.newInstance();
                 for (int i = 2; i < valores.length; i += 2) {
                     pessoa = (Pessoa) interpretadorDeEntidade.preenche(pessoa, valores, i);
@@ -59,7 +67,7 @@ public class LeitorDeRegexService {
                 }
                 pessoaRepository.atualiza(pessoa);
             }
-        } else if (valores[0].equals("1")) {
+        } else if (valores[0].equals("Produto")) {
             //Cadastra Produto
             if (valores[1].equals("0")) {
                 Produto produto = new Produto();
