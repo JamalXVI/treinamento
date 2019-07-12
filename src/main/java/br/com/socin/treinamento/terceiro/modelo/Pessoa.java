@@ -1,5 +1,6 @@
 package br.com.socin.treinamento.terceiro.modelo;
 
+import br.com.socin.treinamento.terceiro.interfaces.Entidade;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,7 +12,7 @@ import java.math.BigDecimal;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Pessoa {
+public class Pessoa implements Entidade {
     private Long id;
     private String nome;
     private String sobrenome;
